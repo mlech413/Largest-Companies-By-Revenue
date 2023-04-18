@@ -1,4 +1,4 @@
-﻿Rank,Name,Name_Link,Name,Symbol,Industry,2022_Revenue_USD_millions,Revenue_Growth,Employees,Headquarters_City,Headquarters_Link,Headquarters_Geo_Loc
+﻿Rank,Name,Name Link,Name,Symbol,Industry,2022 Revenue (USD millions),Revenue Growth,Employees,Headquarters City,Headquarters Link,Headquarters Geo Loc
 1,Walmart,https://en.wikipedia.org/wiki/Walmart,Walmart,WMT,Retail,"572,754", 2.4%,"2,300,000","Bentonville, Arkansas","https://en.wikipedia.org/wiki/Bentonville,_Arkansas","36.366667, -94.213333"
 2,Amazon,https://en.wikipedia.org/wiki/Amazon_(company),Amazon,AMZN,Retail,"469,822", 21.7%,"1,608,000","Seattle, Washington",https://en.wikipedia.org/wiki/Seattle,"47.609722, -122.333056"
 3,Apple,https://en.wikipedia.org/wiki/Apple_Inc,Apple,AAPL,Technology,"365,817", 33.2%,"154,000","Cupertino, California","https://en.wikipedia.org/wiki/Cupertino,_California","37.323056, -122.031944"
