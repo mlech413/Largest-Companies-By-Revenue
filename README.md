@@ -7,7 +7,7 @@ Python Flask-powered API, HTML/CSS, JavaScript, Leaflet, Plotly
 ### "app.py" creates multiple Python Flask-powered APIs for retrieving the data locally from PostgreSQL.
 ### "templates/index.html" is the starting page, in which the headquarters for the top 100 companies by revenue in the United States are displayed in a Leaflet Heat Map visualization. This map also accesses "static/js/leaflet-heat.js" and "static/css/style.css". The user can zoom and scroll this map, or interact with a button to load the additional page.
 ![Leaflet Heat Map](./images/IndexPage.jpg)
-### "templates/dashboard.html" renders the additional page, which contains two additional visualizations. The first is a Plotly bar chart showing the 2022 revenue, grouped by industry.
+### "templates/dashboard.html" renders the additional page, which contains two additional visualizations. The first is a Plotly bar chart showing the 2022 average revenue per industry.
 ![Plotly Bar Chart](./images/DashboardPage-a.jpg)
 ### The user can also interact by selecting a company from a dropdown, which will filter the 2022 stock price data for that company abd display it via a Plotly line chart.
 ![Plotly Bar Chart](./images/DashboardPage-b.jpg)
