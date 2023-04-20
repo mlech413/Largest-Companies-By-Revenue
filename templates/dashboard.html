@@ -73,8 +73,11 @@
                 let indList=[]
                 // Loop through and populate each grouped industry revenue
                 for (i=0; i < data.length; i++){
-                        indList.push(data[i].industry)
+                        // revenue is abbreviated in USD millions, so multiple to get actual revenue
+                        data[i].rev_usd_mil = data[i].rev_usd_mil * 1000000
+                        // write out to the lists
                         revList.push(data[i].rev_usd_mil)
+                        indList.push(data[i].industry)
                     }
                 // Plotly bar chart - total revenue for each indutry
                 var trace1 = {
@@ -84,7 +87,7 @@
                 };
                 var chartData = [trace1];
                 var layout = {
-                title: 'Total Revenue Per Industry of the Top 100 Companies in 2022',
+                title: 'Average Revenue Per Industry of the Top 100 Companies in 2022',
                 xaxis: {
                     automargin: true
                     },
