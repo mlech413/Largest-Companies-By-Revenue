@@ -9,6 +9,6 @@ Python Flask-powered API, HTML/CSS, JavaScript, Leaflet, Plotly
 ![Leaflet Heat Map](./images/IndexPage.jpg)
 ### "dashboard.html" renders the additional page, which contains two additional visualizations. The first is a Plotly bar chart showing the 2022 revenue, grouped by industry.
 ![Plotly Bar Chart](./images/DashboardPage-a.jpg)
-### The user can also interact by selecting a company from a dropdown, which will view the 2022 stock prices for that company via a Plotly line chart.
+### The user can also interact by selecting a company from a dropdown, which will display the 2022 stock prices for that company via a Plotly line chart.
 ![Plotly Bar Chart](./images/DashboardPage-b.jpg)
-### This website uses a Flask app that can only be run locally at http://127.0.0.1:5000/, but a recorded presentation and slide deck are both available ("Largest US Companies.ppt" and "Largest US Companies.mp4").
+### This website uses a Flask app that accesses PostgreSQL and therefore can only be run locally at http://127.0.0.1:5000/, but a recorded presentation and slide deck are both available ("Largest US Companies.ppt" and "Largest US Companies.mp4").
