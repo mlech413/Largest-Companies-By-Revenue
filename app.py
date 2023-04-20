@@ -27,7 +27,7 @@ def companies():
 @app.route("/api/v1.0/names")
 def names():
     conn = engine.connect()
-    query = "SELECT name, symbol, industry FROM companies WHERE symbol IS NOT NULL"
+    query = "SELECT name, symbol, industry FROM companies WHERE symbol IS NOT NULL ORDER BY name"
     nameList = pd.read_sql(query, conn)
     # print(nameList)
     return nameList.to_json(orient="records")
@@ -35,10 +35,9 @@ def names():
 @app.route("/api/v1.0/<stock>")
 def stocks(stock):
     conn = engine.connect()
-    query = (f"SELECT * FROM stocks WHERE symbol = '{stock}'")
-    df2 = pd.read_sql(query, conn)
-    # print(df1)
-    return df2.to_json(orient="records")
+    query = (f"SELECT adj_close, date FROM stocks WHERE symbol = '{stock}'")
+    userSelection = pd.read_sql(query, conn)
+    return userSelection.to_json(orient="records")
 
 if __name__ == "__main__":
     app.run(debug=True)
