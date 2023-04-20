@@ -21,7 +21,6 @@ def companies():
     conn = engine.connect()
     query = "SELECT * FROM companies"
     df1 = pd.read_sql(query, conn)
-    # print(df1)
     return df1.to_json(orient="records")
 
 @app.route("/api/v1.0/names")
@@ -29,8 +28,21 @@ def names():
     conn = engine.connect()
     query = "SELECT name, symbol, industry FROM companies WHERE symbol IS NOT NULL ORDER BY name"
     nameList = pd.read_sql(query, conn)
-    # print(nameList)
     return nameList.to_json(orient="records")
+
+@app.route("/api/v1.0/industries")
+def industries():
+    conn = engine.connect()
+    query = "SELECT industry, rev_usd_mil FROM companies ORDER BY 1"
+    indList = pd.read_sql(query, conn)
+    return indList.to_json(orient="records")
+
+# @app.route("/api/v1.0/industries")
+# def industries():
+#     conn = engine.connect()
+#     query = "SELECT industry, MAX(rev_usd_mil) as rev_usd_mil, min(rank) as rank FROM companies GROUP BY industry ORDER BY rev_usd_mil DESC"
+#     indList = pd.read_sql(query, conn)
+#     return indList.to_json(orient="records")
 
 @app.route("/api/v1.0/<stock>")
 def stocks(stock):

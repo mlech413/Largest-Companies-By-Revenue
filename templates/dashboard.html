@@ -26,34 +26,84 @@
     <div class="container">
         <div class="center">
             Select a company: 
-            <select id="selecting" onchange="optionchange(this.value)">
+            <select id="selectingStock" onchange="optionchange(this.value)">
             </select>
         </div>
     </div>
     <div id="plot"></div>
+
     <script>
-        function stockNames(){
-            // alert(stockSymbols) 
-            var url = (`http://127.0.0.1:5000/api/v1.0/names`);
+        function industries(){
+            var url = (`http://127.0.0.1:5000/api/v1.0/industries`);
             d3.json(url).then(function(data) {
-                // console.log(data)
-                let selector = d3.select("#selecting")
-                for (i=0; i < data.length;i++){
-                    selector.append("option").text(data[i].name).property("value",data[i].symbol)
+                console.log(data)
+                let revList=[]
+                let indList=[]
+                let industryFound = 'n'
+                let revInt = 0
+                // for (i=0; i < data.length;i++){
+                //     revList.push(data[i].rev_usd_mil)
+                //     indList.push(data[i].industry)
+                // }
+                // console.log(`revList: ${revList}`)
+                // console.log(`indList: ${indList}`)
+                for (i=0; i < data.length; i++){
+                    revInt = data[i].rev_usd_mil * 1000000
+                    parseInt(revInt)
+                    industryFound = 'n'
+                    console.log(`i=${i}, BEGIN - industryFound = n`)
+                    for (r=0; r < indList.length; r++){
+                        console.log(`r=${r}`)
+                        console.log(`indList[r]=${indList[r]}`)
+                        console.log(`data[i].industry=${data[i].industry}`)
+                        if (indList[r] == data[i].industry & i > 0) {
+                        console.log(`indList[r] == data[i].industry & i > 0`)
+                            industryFound = 'y'
+                            console.log(`2 industryFound = y`)
+                            console.log(`old revList[r]=${revList[r]}`)
+                            console.log(`revInt=${revInt}`)
+                            revList[r] = parseInt(revList[r]) + parseInt(revInt)
+                            console.log(`new revList[r]=${revList[r]}`)
+                            r = 999
+                        }
+                    }
+                    if (industryFound == 'n') {
+                        console.log(`3 industryFound = n`)
+                        console.log(`revList.push(revInt=${revInt}`)
+                        console.log(`revList.push(data[i].industry=${data[i].industry}`)
+                        revList.push(revInt)
+                        indList.push(data[i].industry)
+                    }
                 }
-            })
+
+                console.log(`revList: ${revList}`)
+                console.log(`indList: ${indList}`)
+
+
+                var trace1 = {
+                y: revList,
+                x: indList,
+                type: 'bar'
+                };
+                var data = [trace1];
+                var layout = {
+                title: 'Total Revenue Per Industry of the Top 100 Companies in 2022',
+                showlegend: false,
+                height: 600,
+                autosize: true
+                };
+                Plotly.newPlot('plot', data, layout);
+                })
         }
 
         function optionchange(stockSymbols){
-            // alert(stockSymbols) 
-
             var url = (`http://127.0.0.1:5000/api/v1.0/${stockSymbols}`);
             d3.json(url).then(function(data) {
 
                 console.log(data)
                 let dateList=[]
                 let adjCloseList=[]
-                for (i=0; i < data.length;i++){
+                for (i=0; i < data.length; i++){
                     var myDate = new Date(data[i].date);
                     dateList.push(myDate)
                     adjCloseList.push(data[i].adj_close)
@@ -65,46 +115,35 @@
                 x: dateList,
                 mode: 'lines'
                 };
-
                 var data = [trace1];
-
                 var layout = {
                 title: '2022 Closing Stock Price',
                 showlegend: false,
                 height: 400,
                 autosize: true
                 };
-
                 Plotly.newPlot('plot', data, layout);
 
                 console.log(data)
             })
-                // console.log(data[0].adj_close)
-            
-                // for (i=0; i < data.length;i++){
-                //     console.log(data[i].date, data[i].adj_close)
-                //     var trace1 = {
-                //     x: data[i].date,
-                //     y: data[i].adj_close,
-                //     mode: 'lines'
-                //     }
-                //     };
-
-                //     var data = [trace1];
-
-                //     var layout = {
-                //     title: 'Marker Size',
-                //     showlegend: false,
-                //     height: 600,
-                //     width: 600
-                //     };
-
-                //     Plotly.newPlot('plot', data, layout);
-                // }
-            // )
-
+                
         }
+        
+        function stockNames(){
+            var url = (`http://127.0.0.1:5000/api/v1.0/names`);
+            d3.json(url).then(function(data) {
+                let selector = d3.select("#selectingStock")
+                for (i=0; i < data.length;i++){
+                    selector.append("option").text(data[i].name).property("value",data[i].symbol)
+                }
+            })
+        }
+
+        industries()
+
         stockNames()
+
+        
 
 
     </script>
