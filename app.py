@@ -11,7 +11,6 @@ engine = create_engine(f"postgresql+psycopg2://{user}:{password}@{host}:{port}/{
 # Route for rendering the initial landing page
 @app.route("/")
 def home():
-
     return render_template("index.html")
 
 # Route for rendering the linked dashboard page
