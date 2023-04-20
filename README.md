@@ -8,3 +8,4 @@ Python Flask-powered API, HTML/CSS, JavaScript, Leaflet, Plotly
 ### "index.html" is the starting page, in which the headquarters for the top 100 companies by revenue in the United States are displayed in a Leaflet Heat Map visualization. The user can zoom or scroll the map, or interact with a button to load the additional page.
 ### "dashboard.html" renders the additional page, which contains two additional visualizations. The first is a Plotly bar chart showing the 2022 revenue, grouped by industry.
 ### The user can also interact by selecting a company from a dropdown, which will view the 2022 stock prices for that company via a Plotly line chart.
+### A recorded presentaion and slide deck are also available ("Largest US Companies.ppt" and "Largest US Companies.mp4").
