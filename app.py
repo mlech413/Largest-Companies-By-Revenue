@@ -34,13 +34,14 @@ def names():
     nameList = pd.read_sql(query, conn)
     return nameList.to_json(orient="records")
 
-# API to retrieve industry and revenue data
+# API to retrieve grouped industry and revenue data
 @app.route("/api/v1.0/industries")
 def industries():
     conn = engine.connect()
-    query = "SELECT industry, name, rev_usd_mil FROM companies ORDER BY industry"
+    query = "SELECT industry, AVG(rev_usd_mil) AS rev_usd_mil FROM companies GROUP BY industry ORDER BY 2 DESC"
     indList = pd.read_sql(query, conn)
     return indList.to_json(orient="records")
+@app.route("/api/v1.0/industries")
 
 # API to retrieve data for the stock that the user selected in the dropdown
 @app.route("/api/v1.0/<stock>")

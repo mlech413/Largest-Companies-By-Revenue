@@ -68,51 +68,19 @@
         function industries(){
             var url = (`http://127.0.0.1:5000/api/v1.0/industries`);
             d3.json(url).then(function(data) {
-                // ********************************************************************************************
-                // Read through all companies to compile a list by industry and all revenue for that industry.
-                // Loop through every company's industry name and revenue. Then populate an industry name list
-                // and a revenue list. If the industy name doesn't exist, write out the industry name and
-                // revenue for that industry. If the industry name is already in the list, then add the
-                // new revenue to the existing revenue.
-                // ********************************************************************************************
-
                 // initialize variables
                 let revList=[]
                 let indList=[]
-                let industryFound = 'n'
-                let revInt = 0
-                // Loop through all the rows - every company (and it's industry and revenue data)
+                // Loop through and populate each grouped industry revenue
                 for (i=0; i < data.length; i++){
-                    // revenue data is stored abbreviated per million, so multiple by 1 million to get the true number
-                    revInt = data[i].rev_usd_mil * 1000000
-                    // Make sure rev value is always an integer
-                    parseInt(revInt)
-                    // Reset indicator
-                    industryFound = 'n'
-                    // For each company, loop through industry names list to see if that industry name has already been saved.
-                    // If that industry has already been saved, add the revenue to the existing revenue entry.
-                    // If that industry has not been saved, create a new entry in both the industry list and revenue list.
-                    for (r=0; r < indList.length; r++){
-                        if (indList[r] == data[i].industry & i > 0) {
-                            // Industry is already in the list, so set indicator to 'yes'
-                            industryFound = 'y'
-                            // Industry name is already in the list so find its revenue entry and add this revenue to it
-                            revList[r] = parseInt(revList[r]) + parseInt(revInt)
-                            // Set r to 999 so it exits the loop.
-                            r = 999
-                        }
-                    }
-                    if (industryFound == 'n') {
-                        // Industry was not already in the list so write a new entry for industry name and its revenue
-                        revList.push(revInt)
                         indList.push(data[i].industry)
+                        revList.push(data[i].rev_usd_mil)
                     }
-                }
                 // Plotly bar chart - total revenue for each indutry
                 var trace1 = {
-                y: revList,
-                x: indList,
-                type: 'bar'
+                    x: indList,
+                    y: revList,
+                    type: 'bar'
                 };
                 var chartData = [trace1];
                 var layout = {
