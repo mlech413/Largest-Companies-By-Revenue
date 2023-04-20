@@ -132,18 +132,20 @@
         function optionchange(stockSymbols){
             var url = (`http://127.0.0.1:5000/api/v1.0/${stockSymbols}`);
             d3.json(url).then(function(data) {
+                // Getting a year's worth of stock data for the user-selected stock
 
-                console.log(data)
+                // initialize lists
                 let dateList=[]
                 let adjCloseList=[]
+                // loop through the year of stock data and build lists
                 for (i=0; i < data.length; i++){
+                    // format the JSON date data into something readable
                     var myDate = new Date(data[i].date);
+                    // build the lists for the line chart
                     dateList.push(myDate)
                     adjCloseList.push(data[i].adj_close)
                 }
-                console.log(`adjCloseList: ${adjCloseList}`)
-                console.log(`dateList: ${dateList}`)
-                // Plotly line graph - stock prices for the company that the user selected
+                // Plotly line chart - stock prices for the company that the user selected
                 var trace1 = {
                     y: adjCloseList,
                     x: dateList,
