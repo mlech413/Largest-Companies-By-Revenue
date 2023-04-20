@@ -9,36 +9,29 @@
     <script src="https://d3js.org/d3.v5.min.js"></script>
 </head>
 <body>
-    <h1>{{name}}</h1>
-
-    <div id="plot"></div>
+    <h1>Hello</h1>
+    <select id="selecting" onchange="optionchange(this.value)">
+    </select>
     <script>
-        var data = petals;
-        var data = {{petals|tojson|safe}};
-        console.log(data);
-       
-        var trace1 = {
-        x: data.length,
-        y: data.width,
-        mode: 'markers',
-        marker: {
-            size: [40, 60, 80, 100]
+        function stockNames(){
+            // alert(stockSymbols) 
+            var url = (`http://127.0.0.1:5000/api/v1.0/names`);
+            d3.json(url).then(function(data) {
+                console.log(data)
+                let selector = d3.select("#selecting")
+                for (i=0; i<data.length;i++){
+                    selector.append("option").text(data[i].name).property("value",data[i].symbol)
+                }
+            })
         }
-        };
-
-        var data = [trace1];
-
-        var layout = {
-        title: 'Marker Size',
-        showlegend: false,
-        height: 600,
-        width: 600
-        };
-
-        Plotly.newPlot('plot', data, layout);
-
-        console.log(data)
+        function optionchange(stockSymbols){
+            // alert(stockSymbols) 
+            var url = (`http://127.0.0.1:5000/api/v1.0/${stockSymbols}`);
+            d3.json(url).then(function(data) {
+                console.log(data)
+            })
+        }
+        stockNames()
     </script>
-   
-  
+
 </body>
