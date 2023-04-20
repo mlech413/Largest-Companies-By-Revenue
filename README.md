@@ -1,7 +1,6 @@
 # 100 Largest Companies by Revenue in the United States for 2022
 Python Flask-powered API, HTML/CSS, JavaScript, Leaflet, Plotly
-## This Jupyter notebook "exploration.ipynb" file reads, cleans, and uploads 2 files:
-## 100 rows of company data from "largest_us_companies_2022.csv"
+## This Jupyter notebook "exploration.ipynb" file reads, cleans, and uploads 2 files:  100 rows of company data from "largest_us_companies_2022.csv"
 ### Source: Wikipedia - https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue
 ## 21586 rows of historical stock data from "stock_prices_2022.csv"
 ### Source: Yahoo! Finance - https://finance.yahoo.com/lookup
